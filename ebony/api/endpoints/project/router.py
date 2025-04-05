@@ -3,12 +3,12 @@ from fastapi import APIRouter, HTTPException, status
 router = APIRouter(prefix="/projects", tags=["projects"])
 
 @router.get("/")
-async def get_projects():
+def get_projects():
     """Get all projects."""
     return {"projects": [{"id": 1, "name": "Test Project", "description": "A test project"}]}
 
 @router.get("/{project_id}")
-async def get_project(project_id: int):
+def get_project(project_id: int):
     """Get a specific project by ID."""
     # Mock project data, in a real app would be from database
     if project_id != 1:

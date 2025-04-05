@@ -5,7 +5,7 @@ from ebony.constants.config import app_config
 router = APIRouter(prefix="/github", tags=["github"])
 
 @router.get("/repos")
-async def get_repos():
+def get_repos():
     """Get user's GitHub repositories."""
     response = requests.get(
         f"https://api.github.com/users/{app_config.github_owner}/repos",
@@ -22,7 +22,7 @@ async def get_repos():
     return response.json()
 
 @router.get("/repos/{repo_name}")
-async def get_repo(repo_name: str):
+def get_repo(repo_name: str):
     """Get a specific GitHub repository."""
     response = requests.get(
         f"https://api.github.com/repos/{app_config.github_owner}/{repo_name}",
