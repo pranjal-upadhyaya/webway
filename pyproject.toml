@@ -1,0 +1,27 @@
+[tool.poetry]
+name = "webway"
+version = "0.1.0"
+description = ""
+authors = ["pranjal-upadhyaya <rktpranjal@gmail.com>"]
+license = "All Rights Reserved"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "3.12"
+flask = "^3.1.0"
+flask-sqlalchemy = "^3.1.1"
+flask-migrate = "^4.1.0"
+python-dotenv = "^1.1.0"
+jinja2 = "^3.1.6"
+alembic = "^1.15.2"
+sqlalchemy = "^2.0.40"
+fastapi = "^0.115.12"
+
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.5"
+pytest-cov = "^6.1.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
