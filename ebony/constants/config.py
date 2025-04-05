@@ -8,6 +8,9 @@ class AppConfig(BaseSettings):
 
     app_env: str
 
+    github_access_token: str
+    github_owner: str
+
     db_host: Optional[str] = None
     db_port: Optional[int] = None
     db_user: Optional[str] = None
