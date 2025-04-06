@@ -5,6 +5,7 @@ description = ""
 authors = ["pranjal-upadhyaya <rktpranjal@gmail.com>"]
 license = "All Rights Reserved"
 readme = "README.md"
+packages = [{include = "ebony"}]
 
 [tool.poetry.dependencies]
 python = "3.12"

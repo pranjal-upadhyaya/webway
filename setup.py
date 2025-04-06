@@ -8,6 +8,7 @@ setup(
     author="pranjal-upadhyaya",
     author_email="rktpranjal@gmail.com",
     packages=find_packages(),
+    
     include_package_data=True,
     python_requires=">=3.12",
     install_requires=[
