@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 
-from ebony.api.router import api_router
+from ebony.api import api_router
 
 app = FastAPI(
     title="Ebony API",

@@ -1,70 +1,48 @@
-from fastapi import APIRouter, HTTPException, status
-from fastapi.responses import JSONResponse
-import requests
-from ebony.constants.config import app_config
+from fastapi import APIRouter, Depends, status
+from ebony.domain.github.service_handlers.githib_service import GithubService
 from ebony.utilities.api_response import APIResponse
+from ebony.api.module import get_injector_instance
 
 router = APIRouter(prefix="/github", tags=["github"])
 
+def get_github_service() -> GithubService:
+    return get_injector_instance(GithubService)
+
 @router.get("/repos")
-def get_repos():
+def get_repos(
+    github_service: GithubService = Depends(get_github_service)
+):
     """Get user's GitHub repositories."""
-    response = requests.get(
-        f"https://api.github.com/users/{app_config.github_owner}/repos",
-        headers={
-            "Authorization": f"Bearer {app_config.github_access_token}",
-            "Accept": "application/vnd.github.v3+json",
-        }
-    )
-    if response.status_code != 200:
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
-            detail=f"User {app_config.github_owner} not found"
-        )
+
+    response = github_service.get_repositories()
     return APIResponse(
-        data=response.json(), 
-        message="Repositories fetched successfully", 
+        data=response,
+        message="Repositories fetched successfully",
         status_code=status.HTTP_200_OK
     )
 
 @router.get("/repos/{repo_name}")
-def get_repo(repo_name: str):
+def get_repo(
+    repo_name: str,
+    github_service: GithubService = Depends(get_github_service)
+):
     """Get a specific GitHub repository."""
-    response = requests.get(
-        f"https://api.github.com/repos/{app_config.github_owner}/{repo_name}",
-        headers={
-            "Authorization": f"Bearer {app_config.github_access_token}",
-            "Accept": "application/vnd.github.v3+json",
-        }
-    )
-    if response.status_code != 200:
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
-            detail=f"Repository {repo_name} not found"
-        )
+    response = github_service.get_repository(repo_name)
     return APIResponse(
-        data=response.json(), 
-        message="Repository fetched successfully", 
+        data=response,
+        message="Repository fetched successfully",
         status_code=status.HTTP_200_OK
     )
 
 @router.get("/repos/{repo_name}/activity")
-def get_repo_activity(repo_name: str):
+def get_repo_activity(
+    repo_name: str,
+    github_service: GithubService = Depends(get_github_service)
+):
     """Get activity of a specific GitHub repository."""
-    response = requests.get(
-        f"https://api.github.com/repos/{app_config.github_owner}/{repo_name}/activity",
-        headers={
-            "Authorization": f"Bearer {app_config.github_access_token}",
-            "Accept": "application/vnd.github.v3+json",
-        }
-    )
-    if response.status_code != 200:
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
-            detail=f"Repository {repo_name} not found"
-        )
+    response = github_service.get_repository_activity(repo_name)
     return APIResponse(
-        data=response.json(), 
-        message="Repository activity fetched successfully", 
+        data=response,
+        message="Repository activity fetched successfully",
         status_code=status.HTTP_200_OK
     )
