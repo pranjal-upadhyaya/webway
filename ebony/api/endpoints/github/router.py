@@ -1,6 +1,8 @@
 from fastapi import APIRouter, HTTPException, status
+from fastapi.responses import JSONResponse
 import requests
 from ebony.constants.config import app_config
+from ebony.utilities.api_response import APIResponse
 
 router = APIRouter(prefix="/github", tags=["github"])
 
@@ -19,7 +21,11 @@ def get_repos():
             status_code=status.HTTP_404_NOT_FOUND,
             detail=f"User {app_config.github_owner} not found"
         )
-    return response.json()
+    return APIResponse(
+        data=response.json(), 
+        message="Repositories fetched successfully", 
+        status_code=status.HTTP_200_OK
+    )
 
 @router.get("/repos/{repo_name}")
 def get_repo(repo_name: str):
@@ -36,7 +42,11 @@ def get_repo(repo_name: str):
             status_code=status.HTTP_404_NOT_FOUND,
             detail=f"Repository {repo_name} not found"
         )
-    return response.json()
+    return APIResponse(
+        data=response.json(), 
+        message="Repository fetched successfully", 
+        status_code=status.HTTP_200_OK
+    )
 
 @router.get("/repos/{repo_name}/activity")
 def get_repo_activity(repo_name: str):
@@ -53,4 +63,8 @@ def get_repo_activity(repo_name: str):
             status_code=status.HTTP_404_NOT_FOUND,
             detail=f"Repository {repo_name} not found"
         )
-    return response.json()
+    return APIResponse(
+        data=response.json(), 
+        message="Repository activity fetched successfully", 
+        status_code=status.HTTP_200_OK
+    )
