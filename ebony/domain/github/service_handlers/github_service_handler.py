@@ -18,9 +18,9 @@ class GithubServiceHandler(GithubService):
         if response.status_code != 200:
             raise Exception(f"Failed to fetch repositories: {response.status_code}")
         else:
-            repos = [GithubRepository(**repo) for repo in response.json()]
+            repositories = [GithubRepository(**repo) for repo in response.json()]
 
-            response = GetGithubRepositoriesResponse(repos=repos)
+            response = GetGithubRepositoriesResponse(repositories=repositories)
             return response
 
     def get_repository(self, repo_name: str) -> GetGithubRepositoryResponse:

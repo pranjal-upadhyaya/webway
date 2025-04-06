@@ -70,7 +70,7 @@ class GetGithubRepositoryResponse(GithubRepository):
     pass
 
 class GetGithubRepositoriesResponse(BaseModel):
-    repos: list[GithubRepository]
+    repositories: list[GithubRepository]
 
 class GetGithubRepositoryActivityResponse(BaseModel):
     activities: list[GithubRepositoryActivity]
