@@ -2,13 +2,12 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="webway",
+    name="ebony",
     version="0.1.0",
-    description="Webway API backend",
+    description="Backend API for Webway application",
     author="pranjal-upadhyaya",
     author_email="rktpranjal@gmail.com",
-    packages=find_packages(),
-    
+    packages=["ebony"],
     include_package_data=True,
     python_requires=">=3.12",
     install_requires=[
@@ -29,7 +28,6 @@ setup(
     classifiers=[
         "Development Status :: 3 - Alpha",
         "Intended Audience :: Developers",
-        "License :: OSI Approved :: MIT License",
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.12",
     ],

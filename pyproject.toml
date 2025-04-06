@@ -1,7 +1,7 @@
 [tool.poetry]
-name = "webway"
+name = "ebony"
 version = "0.1.0"
-description = ""
+description = "Backend API for Webway application"
 authors = ["pranjal-upadhyaya <rktpranjal@gmail.com>"]
 license = "All Rights Reserved"
 readme = "README.md"
